@@ -1,7 +1,13 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState, useEffect} from 'react'
 import Table from './Table'
+import loadData from '../../../services/loadData'
 
 const PhenotypeByInteraction = ({ data }) => {
+  const [datax, setDatax] = useState([])
+  useEffect(() => {
+    loadData('WBGene00000912', 'phenotype_by_interaction').then((json) => setDatax(json.data))
+  }, [])
+
   const showInteractions = (value) => {
     return value.map((detail, idx) => (
       <ul key={idx}>
